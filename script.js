@@ -53,25 +53,58 @@ function updateBoard() {
 }
 
 // Função para executar a jogada do jogador
+// Função para executar a jogada do jogador
 function playerMove(index) {
+    const winner = checkWinner();
+    if (winner) {
+        // O jogo já acabou, então retorna sem fazer nada
+        return;
+    }
+    if (checkTie()) {
+        // Empate, então retorna sem fazer nada
+        return;
+    }
     if (board[index] === '') {
         board[index] = currentPlayer;
         updateBoard();
         const winner = checkWinner();
         if (winner) {
-            alert(`Você venceu!`);
             playerScore++;
             updateScore();
-            resetGame();
+            document.getElementById('alert-text').textContent = 'Você venceu!';
+            document.getElementById('continue-button').style.display = 'inline';
+            document.getElementById('alert').style.display = 'block';
             return;
         } else if (checkTie()) {
-            alert(`Empate!`);
-            resetGame();
+            document.getElementById('alert-text').textContent = 'Empate!';
+            document.getElementById('continue-button').style.display = 'inline';
+            document.getElementById('alert').style.display = 'block';
             return;
         }
         currentPlayer = 'O';
         setTimeout(computerMove, 500);
     }
+    if (board[index] === '') {
+        board[index] = currentPlayer;
+        updateBoard();
+        const winner = checkWinner();
+        if (winner) {
+            playerScore++;
+            updateScore();
+            document.getElementById('alert-text').textContent = 'Você venceu!';
+            document.getElementById('continue-button').style.display = 'inline';
+            document.getElementById('alert').style.display = 'block';
+            return;
+        } else if (checkTie()) {
+            document.getElementById('alert-text').textContent = 'Empate!';
+            document.getElementById('continue-button').style.display = 'inline';
+            document.getElementById('alert').style.display = 'block';
+            return;
+        }
+        currentPlayer = 'O';
+        setTimeout(computerMove, 500);
+    }
+    
 }
 
 // Função para executar a jogada do computador
@@ -88,24 +121,33 @@ function computerMove() {
     updateBoard();
     const winner = checkWinner();
     if (winner) {
-        alert(`Você perdeu!`);
         computerScore++;
         updateScore();
-        resetGame();
+        document.getElementById('alert-text').textContent = 'Você perdeu!';
+        document.getElementById('continue-button').style.display = 'inline';
+        document.getElementById('alert').style.display = 'block';
         return;
     } else if (checkTie()) {
-        alert(`Empate!`);
-        resetGame();
+        document.getElementById('alert-text').textContent = 'Empate!';
+        document.getElementById('continue-button').style.display = 'inline';
+        document.getElementById('alert').style.display = 'block';
         return;
     }
     currentPlayer = 'X';
 }
+
 
 // Event listener para as células do tabuleiro
 document.getElementById('game-board').addEventListener('click', (event) => {
     const cellIndex = parseInt(event.target.id.slice(-1)) - 1;
     playerMove(cellIndex);
 });
+// Event listener para o botão "Continuar"
+document.getElementById('continue-button').addEventListener('click', () => {
+    resetGame();
+    document.getElementById('alert').style.display = 'none';
+});
+
 
 // Inicial
 // Inicialização do jogo

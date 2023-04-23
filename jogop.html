@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jogo da Velha</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Jogo da Velha</h1>
+
+    <div id="game-board">
+        <div class="cell" id="cell-1"></div>
+        <div class="cell" id="cell-2"></div>
+        <div class="cell" id="cell-3"></div>
+        <div class="cell" id="cell-4"></div>
+        <div class="cell" id="cell-5"></div>
+        <div class="cell" id="cell-6"></div>
+        <div class="cell" id="cell-7"></div>
+        <div class="cell" id="cell-8"></div>
+        <div class="cell" id="cell-9"></div>
+    </div>
+    
+    <center> <h2>Pontuação</h2></center>
+    <div id="score-board">
+        <span>Jagador 1: <span id="player-score">0</span></span>
+        <span>Jogador 2: <span id="player2-score">0</span></span>
+    </div>
+    <div id="button">
+        <button onclick="resetGame()">Reiniciar Jogo</button> 
+        <button onclick="resetScore()">Reiniciar Pontuação</button>
+    </div>
+    <script src="scriptp.js"></script>
+</body>
+</html>
